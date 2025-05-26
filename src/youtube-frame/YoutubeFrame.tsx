@@ -1,6 +1,7 @@
 import { useEffect, useRef, type FC, type Ref } from "react";
 import { loadYoutubeIFrameScript } from "../lib/loadIFrameScript";
 import { getYouTubeEmbedUrl } from "../lib/getEmbedUrl";
+import { YoutubeControls } from "../types/controls";
 
 interface YoutubeFrameProps {
   ref?: Ref<YoutubeControls>;
@@ -42,14 +43,14 @@ const YoutubeFrame: FC<YoutubeFrameProps> = ({
     videoState: () => playerRef.current?.getPlayerState()!,
     play: () => playerRef.current?.playVideo(),
     pause: () => playerRef.current?.pauseVideo(),
-    stop: playerRef.current?.stopVideo(),
+    stop: () => playerRef.current?.stopVideo(),
     seekTo: (seconds: number, allowSeekAhead: boolean = true) =>
       playerRef.current?.seekTo(seconds, allowSeekAhead),
     setVolume: (volume: number) => playerRef.current?.setVolume(volume),
     getVolume: () => playerRef.current?.getVolume() ?? 0,
     getCurrentTime: () => playerRef.current?.getCurrentTime() ?? 0,
     getDuration: () => playerRef.current?.getDuration() ?? 0,
-    getPlayer: playerRef.current,
+    getPlayer: () => playerRef.current,
     loadVideoByUrl: (url: string) => playerRef.current?.loadVideoByUrl(url),
   };
 
