@@ -54,7 +54,6 @@ const YoutubeFrame: FC<YoutubeFrameProps> = ({
   };
 
   useEffect(() => {
-    console.log("useEffect started", src);
     let isMounted = true;
 
     loadYoutubeIFrameScript().then((YT) => {
@@ -112,7 +111,7 @@ const YoutubeFrame: FC<YoutubeFrameProps> = ({
   return (
     <div
       id="player"
-      className={`h-[600px] w-[1200px] border-2 rounded-xl border-amber-50 ${containerClassNames}`}
+      className={`${containerClassNames}`}
     ></div>
   );
 };
