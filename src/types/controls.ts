@@ -1,3 +1,5 @@
+/// <reference types="youtube" />
+
 export interface YoutubeControls {
   videoState: () => YT.PlayerState;
   play: () => void;
