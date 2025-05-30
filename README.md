@@ -3,6 +3,8 @@
 **`react-youtube-light`** is a lightweight React wrapper around the YouTube IFrame API.  
 It simplifies embedding and controlling YouTube videos via a declarative React component interface.
 
+**[DEMO](https://x2gut.github.io/react-youtube-demo/)**
+
 ---
 
 ## 🚀 Features
