@@ -54,6 +54,8 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
       getDuration: () => playerRef.current?.getDuration() ?? 0,
       getPlayer: () => playerRef.current,
       loadVideoByUrl: (url: string) => playerRef.current?.loadVideoByUrl(url),
+      mute: () => playerRef.current?.mute(),
+      unmute: () => playerRef.current?.unMute(),
     };
 
     useImperativeHandle(ref, () => controls);

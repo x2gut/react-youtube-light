@@ -12,4 +12,6 @@ export interface YoutubeControls {
   getDuration: () => number;
   getPlayer: () => YT.Player | null;
   loadVideoByUrl: (url: string) => void;
+  mute: () => void;
+  unmute: () => void;
 }
