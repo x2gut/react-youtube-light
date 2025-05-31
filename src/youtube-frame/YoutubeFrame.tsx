@@ -12,6 +12,7 @@ interface YoutubeFrameProps {
   onVideoPlay?: (...args: any[]) => any;
   onVideoEnd?: (...args: any[]) => any;
   hideControls?: boolean;
+  modestbranding?: boolean;
   containerClassNames?: string;
   src: string;
 }
@@ -29,6 +30,7 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
       startTime,
       endTime,
       mute,
+      modestbranding,
     },
     ref
   ) => {
@@ -39,6 +41,7 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
       start: startTime,
       end: endTime,
       mute: mute ? 1 : 0,
+      modestbranding: modestbranding ? 1 : 0,
     };
 
     const controls: YoutubeControls = {
