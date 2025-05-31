@@ -2,6 +2,7 @@ import { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 import { loadYoutubeIFrameScript } from "../lib/loadIFrameScript";
 import { getYouTubeEmbedUrl } from "../lib/getEmbedUrl";
 import type { YoutubeControls } from "../types/controls";
+import { YoutubeFrameOptions } from "@/types/youtubeFrameOptions";
 
 interface YoutubeFrameProps {
   mute?: boolean;
@@ -12,9 +13,9 @@ interface YoutubeFrameProps {
   onVideoPlay?: (...args: any[]) => any;
   onVideoEnd?: (...args: any[]) => any;
   hideControls?: boolean;
-  modestbranding?: boolean;
   containerClassNames?: string;
   src: string;
+  options: YoutubeFrameOptions;
 }
 
 const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
@@ -30,7 +31,7 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
       startTime,
       endTime,
       mute,
-      modestbranding,
+      options,
     },
     ref
   ) => {
@@ -41,7 +42,12 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
       start: startTime,
       end: endTime,
       mute: mute ? 1 : 0,
-      modestbranding: modestbranding ? 1 : 0,
+      modestbranding: options.modestbranding ? 1 : 0,
+      loop: options.loop ? 1 : 0,
+      autoplay: options.autoplay ? 1 : 0,
+      rel: options.rel ? 1 : 0,
+      playsinline: options.playsinline ? 1 : 0,
+      color: options.color,
     };
 
     const controls: YoutubeControls = {
