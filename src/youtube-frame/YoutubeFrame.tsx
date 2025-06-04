@@ -65,9 +65,9 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
       seekTo: (seconds: number, allowSeekAhead: boolean = true) =>
         playerRef.current?.seekTo(seconds, allowSeekAhead),
       setVolume: (volume: number) => playerRef.current?.setVolume(volume),
-      getVolume: () => playerRef.current?.getVolume() ?? 0,
-      getCurrentTime: () => playerRef.current?.getCurrentTime() ?? 0,
-      getDuration: () => playerRef.current?.getDuration() ?? 0,
+      getVolume: () => playerRef.current?.getVolume(),
+      getCurrentTime: () => playerRef.current?.getCurrentTime(),
+      getDuration: () => playerRef.current?.getDuration(),
       getPlayer: () => playerRef.current,
       loadVideoByUrl: (url: string) => playerRef.current?.loadVideoByUrl(url),
       mute: () => playerRef.current?.mute(),

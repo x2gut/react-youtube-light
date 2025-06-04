@@ -7,12 +7,12 @@ export interface YoutubeControls {
   stop: () => void;
   seekTo: (seconds: number, allowSeekAhead?: boolean) => void;
   setVolume: (volume: number) => void;
-  getVolume: () => number;
-  getCurrentTime: () => number;
-  getDuration: () => number;
+  getVolume: () => number | undefined;
+  getCurrentTime: () => number | undefined;
+  getDuration: () => number | undefined;
   getPlayer: () => YT.Player | null;
   loadVideoByUrl: (url: string) => void;
   mute: () => void;
   unmute: () => void;
-  isPlayerReady: () => boolean
+  isPlayerReady: () => boolean;
 }
