@@ -1,4 +1,10 @@
-import { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
+import {
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+  useState,
+} from "react";
 import { loadYoutubeIFrameScript } from "../lib/loadIFrameScript";
 import { getYouTubeEmbedUrl } from "../lib/getEmbedUrl";
 import type { YoutubeControls } from "../types/controls";
@@ -15,7 +21,7 @@ interface YoutubeFrameProps {
   hideControls?: boolean;
   containerClassNames?: string;
   src: string;
-  options: YoutubeFrameOptions;
+  options?: YoutubeFrameOptions;
 }
 
 const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
@@ -36,22 +42,23 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
     ref
   ) => {
     const playerRef = useRef<YT.Player | null>(null);
+    const [isPlayerReady, setIsPlayerReady] = useState(false);
 
     const ytPlayerVars: YT.PlayerVars = {
       controls: hideControls ? 0 : 1,
       start: startTime,
       end: endTime,
       mute: mute ? 1 : 0,
-      modestbranding: options.modestbranding ? 1 : 0,
-      loop: options.loop ? 1 : 0,
-      autoplay: options.autoplay ? 1 : 0,
-      rel: options.rel ? 1 : 0,
-      playsinline: options.playsinline ? 1 : 0,
-      color: options.color,
+      modestbranding: options?.modestbranding ? 1 : 0,
+      loop: options?.loop ? 1 : 0,
+      autoplay: options?.autoplay ? 1 : 0,
+      rel: options?.rel ? 1 : 0,
+      playsinline: options?.playsinline ? 1 : 0,
+      color: options?.color,
     };
 
     const controls: YoutubeControls = {
-      videoState: () => playerRef.current?.getPlayerState()!,
+      videoState: () => playerRef.current?.getPlayerState(),
       play: () => playerRef.current?.playVideo(),
       pause: () => playerRef.current?.pauseVideo(),
       stop: () => playerRef.current?.stopVideo(),
@@ -65,6 +72,7 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
       loadVideoByUrl: (url: string) => playerRef.current?.loadVideoByUrl(url),
       mute: () => playerRef.current?.mute(),
       unmute: () => playerRef.current?.unMute(),
+      isPlayerReady: () => isPlayerReady
     };
 
     useImperativeHandle(ref, () => controls);
@@ -88,6 +96,7 @@ const YoutubeFrame = forwardRef<YoutubeControls, YoutubeFrameProps>(
             events: {
               onReady: () => {
                 onVideoReady?.();
+                setIsPlayerReady(true);
               },
               onStateChange: (event) => {
                 switch (event.data) {

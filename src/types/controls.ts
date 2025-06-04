@@ -1,7 +1,7 @@
 /// <reference types="youtube" />
 
 export interface YoutubeControls {
-  videoState: () => YT.PlayerState;
+  videoState: () => YT.PlayerState | undefined;
   play: () => void;
   pause: () => void;
   stop: () => void;
@@ -14,4 +14,5 @@ export interface YoutubeControls {
   loadVideoByUrl: (url: string) => void;
   mute: () => void;
   unmute: () => void;
+  isPlayerReady: () => boolean
 }
